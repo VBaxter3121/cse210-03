@@ -1,0 +1,85 @@
+Classes:
+
+    Director:
+        Variables:
+            list - currentParachute
+            int - parachuteState
+            bool - isPlaying
+        Methods:
+            startGame()
+            getInputs()
+            doUpdates()
+            doOutputs()
+            gameContinue()
+                
+    Terminal Service:
+        Variables:
+
+        Methods:
+            outputText()
+            playerInput()
+
+    Guesser:
+        Variables:
+            list - correctGuesses
+            list - incorrectGuesses
+            string - wordProgress
+            string - guess
+        Methods:
+            compareGuess()
+            updateWord()
+            
+    Puzzler:
+        Variables:
+            string - chosenWord
+        Methods:
+            chooseWord()
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Main
+    Director
+
+        startGame
+
+            puzzler.chooseWord
+            doOutputs
+
+            while isPlaying
+
+                getInputs
+
+                    guess = playerInput
+
+                doUpdates
+
+                    compareGuess
+                    wordprogress = updateWord
+                    gameContinue
+
+                doOutputs
+
+                    outputText(wordProgress)
+                    outputText(currentParachute)
+
+                gameContinue(wordProgress, chosenWord)
+                    if wordProgress == chosenWord or parachuteState == 11
+                    isPlaying = False
+
+    Guesser
+
+        compareGuess(guess, chosenWord, parachuteState)
+            if guess in chosenWord
+                correctGuesses.append guess
+            else
+                incorrectGuesses.append guess
+                parachuteState += 1
+
+        updateWord(chosenWord, correctGuesses)
+            for char in chosenWord
+                if char not in correctGuesses
+                    char = _
+
+    Puzzler
+
+        chooseWord
